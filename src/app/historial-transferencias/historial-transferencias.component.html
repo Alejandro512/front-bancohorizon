@@ -40,6 +40,11 @@
         <button *ngIf="fechaInicio || fechaFin" (click)="fechaInicio = fechaFin = ''; filtrarPorFechas()" class="boton">Quitar Filtro</button>
       </div>
       </div>
+
+      <div class="pdf-button-container" style="text-align: right; margin: 20px 0;">
+        <button (click)="generarPDF()" class="boton">Generar Estado de Cuenta PDF</button>
+      </div>
+      
       <div *ngIf="transferenciasFiltradas.length === 0">
         <p>No hay transferencias para mostrar.</p>
       </div>

@@ -7,6 +7,8 @@ import { ComparticionParametrosService } from '../services/comparticion-parametr
 import { MatSnackBar } from '@angular/material/snack-bar';
 import moment from 'moment';
 import 'moment-timezone';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-historial-transferencias',
@@ -141,6 +143,37 @@ export class HistorialTransferenciasComponent implements OnInit {
     }
   }
   
+  generarPDF(): void {
+    const doc = new jsPDF();
+
+    // Agregar título
+    doc.setFontSize(18);
+    doc.text('Historial de Transferencias', 14, 22);
+
+    // Agregar Marca de Agua
+    doc.setFontSize(60);
+    doc.setTextColor(200, 200, 200);
+    doc.text('Confidencial', 35, 150, { angle: 45 });
+
+    // Reiniciar color y tamaño de fuente
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(12);
+
+    // Agregar tabla
+    (doc as any).autoTable({
+      head: [['Fecha', 'Tipo', 'Descripción', 'Monto']],
+      body: this.transferenciasFiltradas.map(t => [
+        moment(t.fecha).format('DD/MM/YYYY'),
+        t.tipo.charAt(0).toUpperCase() + t.tipo.slice(1),
+        t.descripcion || '',
+        t.monto.toFixed(2)
+      ]),
+      startY: 30
+    });
+
+    // Guardar PDF
+    doc.save('Historial_Transferencias.pdf');
+  }
 
   redirectTo(route: string): void {
     if (this.cedula) {

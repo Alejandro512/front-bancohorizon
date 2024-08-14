@@ -225,6 +225,21 @@ li p {
   background-color: #29AECC;
 }
 
+.pdf-button-container .boton {
+  padding: 10px 15px;
+  background-color: #1A61A0;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Magdelin Alt Bold';
+  transition: background-color 0.3s ease;
+}
+
+.pdf-button-container .boton:hover {
+  background-color: #29AECC;
+}
+
 /* Estilos generales */
 .header h2 {
   font-size: 36px;
