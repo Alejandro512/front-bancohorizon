@@ -2,6 +2,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <div class="header">
+  <button class="menu-toggle" (click)="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+  </button>
   <div class="user-profile">
     <i class="fas fa-user"></i>
   </div>
@@ -13,7 +16,7 @@
 <div class="main-container">
   <div class="sidebar"> 
     <div class="logo">
-      <img src="assets/logo3.png" alt="icon">
+      <img src="assets/logo3.1.png" alt="icon">
     </div>
     <button (click)="redirectTo('cambio-contraseña')"><i class="fas fa-key"></i> Cambio Contraseña</button>
     <button (click)="redirectTo('crear-cuenta')"><i class="fas fa-plus"></i> Agregar Cuenta</button>
@@ -22,7 +25,7 @@
     <button (click)="redirectTo('seleccion-servicio')"><i class="fas fa-money-bill-wave"></i> Pagar Servicios</button>
     <button (click)="redirectTo('/')"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
   </div>
-  
+  <div class="overlay" (click)="toggleSidebar()"></div> 
   <div class="content">
     <h3>Cuentas</h3>
     
@@ -76,3 +79,5 @@
     
   </div>
 </div>
+
+<script src="Conversor.js"></script>

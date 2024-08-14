@@ -187,15 +187,24 @@ input {
     flex-direction: column;
     align-items: center; /* Centra los elementos horizontalmente */
     padding: 30px; /* Ajusta el padding para dar espacio */
+    height: 800px;
   }
 
   .header .logo img {
-    width: 120px; /* Reduce el tamaño del logo */
+    margin-left: 50px;
+    margin-top: 30px;
+    width: 300px; /* Reduce el tamaño del logo */
     height: auto; /* Mantiene la proporción del logo */
   }
 
   .content {
     padding: 10px; /* Reduce el padding en el contenedor de contenido */
+    margin-right: 0;
+  }
+
+  .header {
+    background-color: #7ADBEF; /* Asegura que el contenido esté por encima */
+    padding-top: 1px;
   }
 
   .form-group {
@@ -219,7 +228,8 @@ input {
     display: flex;
     justify-content: center; /* Centra el CAPTCHA horizontalmente */
     margin-bottom: 20px; /* Ajusta el margen inferior para dar espacio */
-    padding: 0 10px; /* Añade un poco de padding para evitar que el CAPTCHA toque los bordes */
+    padding: 0 45px;
+    margin-top: 40px;
   }
 
   .form-captcha > .g-recaptcha {
@@ -252,24 +262,3 @@ input {
   }
 }
 
-@media (max-width: 576px) {
-  .reason,
-  .service-card,
-  .branch {
-    flex: 1 1 100%; /* Asegura que los elementos ocupen el 100% del ancho del contenedor */
-  }
-
-  .reason,
-  .branch-details {
-    text-align: center; /* Centra el texto dentro de los contenedores */
-  }
-
-  .button-container button,
-  .forgot-credentials button {
-    width: 100%; /* Ajusta el ancho de los botones para que ocupen el 100% del contenedor */
-    max-width: 180px; /* Ajusta el ancho máximo de los botones */
-    font-size: 12px; /* Ajusta el tamaño de la fuente */
-    padding: 6px; /* Ajusta el padding */
-    margin-bottom: 10px; /* Añade margen inferior entre los botones */
-  }
-}

@@ -66,6 +66,11 @@ h2 {
   margin: 0; /* Asegura que el ícono esté perfectamente centrado */
 }
 
+.main-container {
+  display: flex;
+  height: calc(100vh - 60px); /* Ajusta la altura para que la barra lateral y el contenido se ajusten a la pantalla */
+}
+
 .sidebar {
   width: 250px;
   background-color: #2cb5d3;
@@ -76,8 +81,26 @@ h2 {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh; /* Se asegura que la barra lateral ocupe toda la altura de la ventana */
+  height: 100vh; /* Asegura que la barra lateral ocupe toda la altura de la ventana */
   z-index: 1000; /* Coloca la barra lateral sobre el header */
+  transition: transform 0.3s ease;
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: #1A61A0;
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.menu-toggle:focus {
+  outline: none;
 }
 
 .logo {
@@ -88,7 +111,7 @@ h2 {
 
 .logo img {
   width: 250px;
-  margin-top: 10px; /* Ajusta este valor para controlar la posición vertical */
+  margin-top: 10px;
 }
 
 .sidebar button {
@@ -247,59 +270,92 @@ li p {
   min-height: 100vh;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 768px) {
   /* Sidebar */
-  .sidebar {
-    width: 120px; /* Reduce el ancho de la barra lateral */
-    height: 100vh; /* Asegura que la barra lateral ocupe toda la altura de la pantalla */
-    padding: 5px; /* Reduce el padding para adaptarse mejor */
-    position: fixed; /* Fija la barra lateral en su lugar */
-    top: 0;
-    left: 0;
-    overflow-y: auto; /* Añade scroll si el contenido de la barra lateral es demasiado largo */
+  .menu-toggle {
+    display: inline-block;
   }
 
   .logo img {
-    width: 120px; /* Reduce el ancho del logo */
-     /* Ajusta el margen superior si es necesario */
+    width: 220px; /* Ajusta el tamaño de la imagen del logo para pantallas pequeñas */
+    margin-top: 10px; /* Ajusta este valor para controlar la posición vertical */
   }
 
-  /* Sidebar buttons */
-  .sidebar button {
-    font-size: 12px; /* Reduce el tamaño de la fuente de los botones en la barra lateral */
-    padding: 8px 5px; /* Reduce el padding de los botones */
-    text-align: left;
+  .sidebar {
+    transform: translateX(-100%);
   }
 
-  .sidebar button i {
-    margin-right: 5px; /* Ajusta el margen del icono */
+  .sidebar.active {
+    transform: translateX(0);
   }
 
-  /* Header */
   .header {
-    width: calc(100% - 100px); /* Ajusta el ancho del header en función del nuevo tamaño de la barra lateral */
-    margin-left: 80px; /* Alinea el header con la barra lateral */
-    padding: 10px; /* Reduce el padding */
+    width: 100%;
+    margin-left: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .titulo {
+    flex: 1; /* Permite que ocupe el máximo ancho disponible */
     text-align: center;
   }
 
-  .header h2 {
-    font-size: 18px; /* Reduce el tamaño del título */
+  .menu-toggle {
+    margin-right: 10px; /* Asegura que el botón de menú tenga un poco de espacio */
   }
 
   .user-profile {
-    width: 30px; /* Reduce el tamaño del perfil de usuario */
-    height: 30px; /* Reduce el tamaño del perfil de usuario */
-    font-size: 14px; /* Reduce el tamaño del icono */
+    position: absolute;
+    top: 10px;
+    right: 15px; /* Asegura que el perfil esté en la esquina derecha */
+    background-color: #29AECC;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
   }
 
-  /* Content */
   .content {
-    margin-left: 100px; /* Deja espacio para la barra lateral */
-    max-width: calc(100% - 100px); /* Ajusta el contenido para que no se desborde */
-    padding: 10px; /* Reduce el padding */
+    margin-left: 0;
+    max-width: 100%;
   }
 
+  .sidebar.hidden {
+    display: none;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 900; /* Debe estar por debajo de la barra lateral */
+    display: none; /* Oculto por defecto */
+  }
+  
+  .sidebar.active + .overlay {
+    display: block;
+  }
+
+  h2 {
+    text-align: center;
+    color: #1A61A0;
+    font-family: 'Poppins', sans-serif; /* Cambia a 'Roboto' o 'Lato' si prefieres */
+    font-weight: bold;
+    font-size: 25px; /* Ajusta según prefieras */
+    margin-bottom: 20px;
+  }
   /* Container */
   .container {
     padding: 17px; /* Reduce el padding dentro del contenedor */
@@ -307,7 +363,7 @@ li p {
     max-width: 80%; /* Asegura que el contenedor no se desborde */
     width: 300px;
     margin-left: auto; /* Automático para el margen izquierdo */
-    margin-right: 0; /* Margen derecho a 0 para que no haya espacio en la derecha */
+    margin-right: auto; /* Margen derecho a 0 para que no haya espacio en la derecha */
   }
 
   /* Filtrar opciones */
@@ -348,5 +404,10 @@ li p {
   .button-group .boton {
     padding: 8px 10px; /* Ajusta el padding de los botones */
     font-size: 14px; /* Ajusta el tamaño de la fuente */
+  }
+}
+@media (min-width: 768px) {
+  .menu-toggle {
+      display: none;
   }
 }

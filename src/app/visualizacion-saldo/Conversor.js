@@ -14,3 +14,4 @@ function convertCurrency() {
     var result = amount * rate;
     document.getElementById('result').innerHTML = "Resultado: " + result.toFixed(2) + " " + currency;
 }
+  

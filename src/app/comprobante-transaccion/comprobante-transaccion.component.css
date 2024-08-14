@@ -36,11 +36,11 @@ body, html {
   .content {
     flex: 1; /* El contenedor debe llenar el espacio restante */
     padding: 20px;
-    background: #F7F4E7; /* Fondo celeste */
+    background: #F3F5F7; /* Fondo celeste */
     display: flex;
     justify-content: center; /* Centramos el contenido dentro del contenedor */
     align-items: center; /* Centra verticalmente */
-    min-height: calc(100vh - 75px); /* Ajusta para considerar el header */
+    min-height: calc(70vh - 75px); /* Ajusta para considerar el header */
 }
 
 #comprobante {
@@ -63,7 +63,7 @@ body, html {
 }
 
 #descripcion {
-    background-color: #f5f5dc; /* Color beige */
+    background-color: #F3F5F7; /* Color beige */
     padding: 15px;
     border-radius: 5px;
     margin: 10px 0;

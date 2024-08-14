@@ -9,7 +9,7 @@ body, html {
 }
 
 *,
-*:before,
+*:before, 
 *:after {
   box-sizing: inherit;
 }
@@ -57,6 +57,11 @@ body, html {
   margin: 0; /* Asegura que el ícono esté perfectamente centrado */
 }
 
+.main-container {
+  display: flex;
+  height: calc(100vh - 60px); /* Ajusta la altura para que la barra lateral y el contenido se ajusten a la pantalla */
+}
+
 .sidebar {
   width: 250px;
   background-color: #2cb5d3;
@@ -67,8 +72,26 @@ body, html {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh; /* Se asegura que la barra lateral ocupe toda la altura de la ventana */
+  height: 100vh; /* Asegura que la barra lateral ocupe toda la altura de la ventana */
   z-index: 1000; /* Coloca la barra lateral sobre el header */
+  transition: transform 0.3s ease;
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: #1A61A0;
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.menu-toggle:focus {
+  outline: none;
 }
 
 .logo {
@@ -79,7 +102,7 @@ body, html {
 
 .logo img {
   width: 250px;
-  margin-top: 10px; /* Ajusta este valor para controlar la posición vertical */
+  margin-top: 10px;
 }
 
 .sidebar button {
@@ -404,55 +427,94 @@ body, html {
 }
 
 /* Media Queries para pantallas con ancho máximo de 450px */
-@media (max-width: 450px) {
-  /* Ajustes generales */
-  body, html {
-      font-size: 14px; /* Reduce el tamaño de fuente global */
-  }
-
-  .header {
-      width: calc(100% - 150px); /* Ajusta el ancho del header para pantallas pequeñas */
-      margin-left: 120px; /* Alinea el header con el nuevo tamaño de la barra lateral */
-      padding: 10px; /* Reduce el padding del header */
-  }
-
-  .header h2 {
-      font-size: 18px; /* Reduce el tamaño del título */
-  }
-
-  .user-profile {
-      width: 30px; /* Reduce el tamaño del perfil de usuario */
-      height: 30px; /* Reduce la altura del perfil de usuario */
-      font-size: 14px; /* Reduce el tamaño del ícono */
-  }
-
-  .content {
-      margin-left: 120px; /* Deja espacio para la barra lateral más estrecha */
-      padding: 15px; /* Reduce el padding del contenido */
-      max-width: calc(100% - 120px); /* Ajusta el ancho del contenido */
-  }
-
-  .sidebar {
-      width: 120px; /* Reduce el ancho de la barra lateral */
-      padding: 10px; /* Reduce el padding de la barra lateral */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: inline-block;
   }
 
   .logo img {
-      width: 100px; /* Reduce el tamaño del logo en la barra lateral */
-      margin-top: 5px; /* Ajusta el margen superior del logo */
+    width: 220px; /* Ajusta el tamaño de la imagen del logo para pantallas pequeñas */
+    margin-top: 10px; /* Ajusta este valor para controlar la posición vertical */
   }
 
-  .sidebar button {
-      font-size: 12px; /* Reduce el tamaño de la fuente de los botones */
-      padding: 8px; /* Reduce el padding de los botones */
+  .sidebar {
+    transform: translateX(-100%);
   }
 
-  .sidebar button i {
-      margin-right: 5px; /* Ajusta el margen de los íconos en los botones */
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .header {
+    width: 100%;
+    margin-left: 0;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .titulo {
+    flex: 1; /* Permite que ocupe el máximo ancho disponible */
+    text-align: center;
+  }
+
+  .menu-toggle {
+    margin-right: 10px; /* Asegura que el botón de menú tenga un poco de espacio */
+  }
+
+  .user-profile {
+    position: absolute;
+    top: 10px;
+    right: 15px; /* Asegura que el perfil esté en la esquina derecha */
+    background-color: #29AECC;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .content {
+    margin-left: 0;
+    max-width: 100%;
+  }
+
+  .sidebar.hidden {
+    display: none;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 900; /* Debe estar por debajo de la barra lateral */
+    display: none; /* Oculto por defecto */
+  }
+  
+  .sidebar.active + .overlay {
+    display: block;
+  }
+
+  h2 {
+    text-align: center;
+    color: #1A61A0;
+    font-family: 'Poppins', sans-serif; /* Cambia a 'Roboto' o 'Lato' si prefieres */
+    font-weight: bold;
+    font-size: 25px; /* Ajusta según prefieras */
+    margin-bottom: 20px;
   }
 
   .container {
-      width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+      width: 90%; /* Asegura que el contenedor ocupe todo el ancho disponible */
       padding: 15px; /* Reduce el padding dentro del contenedor */
       margin: 10px auto; /* Ajusta los márgenes superior e inferior */
       max-width: 100%; /* Asegura que el contenedor no se desborde */
@@ -540,5 +602,10 @@ body, html {
 
   .ventana-confirmacion .button-container .btn-secondary {
       background-color: #ccc; /* Mantiene el color de fondo secundario */
+  }
+}
+@media (min-width: 768px) {
+  .menu-toggle {
+      display: none;
   }
 }

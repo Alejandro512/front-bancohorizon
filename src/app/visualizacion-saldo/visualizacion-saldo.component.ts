@@ -82,6 +82,16 @@ export class VisualizacionSaldoComponent implements OnInit {
     this.mostrarSaldo = !this.mostrarSaldo;
   }
 
+  toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.overlay');
+
+    if (sidebar && overlay) {
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
+  }
+
   viewTransferHistory(numeroCuenta: string, cedula: string | null): void {
     if (cedula) {
       this.comparticionParametrosService.setNumeroCuenta(numeroCuenta);

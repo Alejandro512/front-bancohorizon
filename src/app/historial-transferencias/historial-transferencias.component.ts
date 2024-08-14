@@ -80,11 +80,17 @@ export class HistorialTransferenciasComponent implements OnInit {
     } else {
         console.error('Número de cuenta no proporcionado');
     }
-}
+  }
 
-  
-  
-  
+  toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.overlay');
+
+    if (sidebar && overlay) {
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
+  }  
 
   filtrarPorTipo(tipo: string): void {
     if (tipo === 'todos') {
@@ -99,20 +105,21 @@ export class HistorialTransferenciasComponent implements OnInit {
 
   filtrarPorFechas(): void {
     if (this.fechaInicio && this.fechaFin) {
-      const fechaInicio = moment(this.fechaInicio).startOf('day').toDate();
-      const fechaFin = moment(this.fechaFin).endOf('day').toDate();
-
+      const fechaInicio = moment(this.fechaInicio).startOf('day').tz('America/Guayaquil').toDate();
+      const fechaFin = moment(this.fechaFin).endOf('day').tz('America/Guayaquil').toDate();
+      const hoy = moment().tz('America/Guayaquil').endOf('day').toDate();
+  
       if (fechaInicio > fechaFin) {
         this.snackBar.open('La fecha de inicio no puede ser mayor que la fecha de fin.', 'Cerrar', {
           duration: 5000,
         });
         this.transferenciasFiltradas = [];
-      } else if (fechaInicio > new Date()) {
+      } else if (fechaInicio > hoy) {
         this.snackBar.open('La fecha de inicio es futura. No se pueden mostrar registros.', 'Cerrar', {
           duration: 5000,
         });
         this.transferenciasFiltradas = [];
-      } else if (fechaFin > new Date()) {
+      } else if (fechaFin > hoy) {
         this.snackBar.open('La fecha de fin es futura. No se pueden mostrar registros.', 'Cerrar', {
           duration: 5000,
         });
@@ -122,7 +129,7 @@ export class HistorialTransferenciasComponent implements OnInit {
           const transferenciaFecha = new Date(transferencia.fecha);
           return transferenciaFecha >= fechaInicio && transferenciaFecha <= fechaFin;
         });
-
+  
         if (this.transferenciasFiltradas.length === 0) {
           this.snackBar.open('No se encontraron registros para el rango de fechas seleccionado.', 'Cerrar', {
             duration: 5000,
@@ -133,6 +140,7 @@ export class HistorialTransferenciasComponent implements OnInit {
       this.transferenciasFiltradas = [...this.transferencias];
     }
   }
+  
 
   redirectTo(route: string): void {
     if (this.cedula) {

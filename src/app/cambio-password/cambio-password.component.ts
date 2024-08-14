@@ -166,7 +166,15 @@ export class CambioPasswordComponent implements OnInit {
     }
   }
   
+  toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.overlay');
 
+    if (sidebar && overlay) {
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+    }
+  }
 
   redirectTo(route: string): void {
     if (this.cedula) {
