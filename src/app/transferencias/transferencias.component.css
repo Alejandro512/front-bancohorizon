@@ -263,7 +263,7 @@ body, html {
 
 .button-container .btn-secondary:hover {
   background-color: #999;
-}
+} 
 
 /* Estilos para la ventana de confirmación */
 .overlay {
@@ -489,7 +489,7 @@ body, html {
     display: none;
   }
 
-  .overlay {
+  .overlay-barra {
     position: fixed;
     top: 0;
     left: 0;
