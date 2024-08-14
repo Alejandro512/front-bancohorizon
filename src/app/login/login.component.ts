@@ -24,7 +24,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
   isProcessing: boolean = false;
-  reCaptchaSiteKey = '6LedISUqAAAAAJ9mZu77no42om4lIATXbaPfoYr9'; 
+  reCaptchaSiteKey = '6LfWtSYqAAAAAHN_eH9rwHZvcDxn60Jn7bQrWV7a'; 
 
   constructor(
     private fb: FormBuilder,
