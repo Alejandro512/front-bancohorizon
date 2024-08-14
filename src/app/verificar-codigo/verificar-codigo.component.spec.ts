@@ -1,18 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VerificarCodigoComponent } from './verificar-codigo.component';
+import { VerificarCodigoRecuperacionComponent } from './verificar-codigo.component';
+
 
 describe('VerificarCodigoComponent', () => {
-  let component: VerificarCodigoComponent;
-  let fixture: ComponentFixture<VerificarCodigoComponent>;
+  let component: VerificarCodigoRecuperacionComponent;
+  let fixture: ComponentFixture<VerificarCodigoRecuperacionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VerificarCodigoComponent]
+      imports: [VerificarCodigoRecuperacionComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(VerificarCodigoComponent);
+    fixture = TestBed.createComponent(VerificarCodigoRecuperacionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
